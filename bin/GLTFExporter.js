@@ -23,8 +23,6 @@ import {
 
 import { Blob } from 'node:buffer';
 
-// import * as fs from 'fs';
-
 
 class GLTFExporter {
 
@@ -547,8 +545,9 @@ class GLTFWriter {
 
 			if ( json.buffers && json.buffers.length > 0 ) {
 
-          const base64data = Buffer.from(await blob.text());
-          json.buffers[0].uri = base64data;
+          const buff = Buffer.from(await blob.arrayBuffer());
+          const base64data = buff.toString("base64");
+          json.buffers[0].uri = "data:application/octet-stream;base64," + base64data;
           onDone(json);
 
 			} else {
