@@ -7,8 +7,7 @@ import trimesh
 
 def main():
     parser = argparse.ArgumentParser(description='View GLtf file')
-    parser.add_argument('-f', '--file', help='file location',
-                        required=True, type=str)
+    parser.add_argument('file', help='file location', type=str)
     args = vars(parser.parse_args())
 
 
