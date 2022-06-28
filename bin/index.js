@@ -11,7 +11,7 @@ import {build} from "jsroot/geom";
 // Three
 import {Blob} from 'node:buffer';
 import * as THREE from 'three';
-import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
+import { GLTFExporter } from './GLTFExporter.js';
 
 // FS
 import * as fs from "fs";
@@ -39,7 +39,19 @@ console.log("      " + `${options.inputFile}`);
 
 
 const inFile = await openFile(`${options.inputFile}`);
-const obj = await inFile.readObject(`${options.name}`); 
+
+let obj;
+try {
+    obj = await inFile.readObject(`${options.name}`);
+} catch (err) {
+    if (err.message.includes("Key not found")) {
+        console.log("ERROR: Provided object name '" +
+                    `${options.name}` + "' not found!")
+        process.exit(1);
+    } else {
+        throw err;
+    }
+}
 
 let objOpt = {numfaces:100000};
 const obj3d = build(obj, objOpt);
@@ -52,6 +64,9 @@ exporter.parse(obj3d, function(gltf) {
         if (err) {
             console.log("ERROR: File can't be saved!");
             return console.log(err);
+            process.exit(1);
         }
+
+        console.log("INFO: Result saved to: '" + `${options.outputFile}`);
     })
 });
