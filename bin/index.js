@@ -26,7 +26,7 @@ const options = yargs(hideBin(process.argv))
     .option("o", {alias: "output-file",
                   describe: "Output ROOT file",
                   type: "string",
-                  default: "fcc-detector.gltf"})
+                  default: "detector.gltf"})
     .option("n", {alias: "name",
                   describe: "Object name",
                   type: "string",
