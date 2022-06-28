@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import sys
+import argparse
+import trimesh
+
+
+def main():
+    parser = argparse.ArgumentParser(description='View GLtf file')
+    parser.add_argument('-f', '--file', help='file location',
+                        required=True, type=str)
+    args = vars(parser.parse_args())
+
+
+    _mesh = trimesh.load(args['file'])
+
+    _mesh.show()
+
+
+if __name__ == '__main__':
+    main()
