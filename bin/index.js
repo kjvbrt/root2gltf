@@ -18,11 +18,9 @@ import * as fs from "fs";
 
 
 const options = yargs(hideBin(process.argv))
-    .usage("Usage: [-h] [-n <object-name>] -i <input-file>")
-    .option("i", {alias: "input-file",
-                  describe: "Input ROOT file",
-                  type: "string",
-                  demandOption: true})
+    .usage("Usage: [-h] [-n <object-name>] [-o <output-file>] <input-file>")
+    .positional("input-file", {describe: "Input ROOT file",
+                               type: "string"})
     .option("o", {alias: "output-file",
                   describe: "Output ROOT file",
                   type: "string",
@@ -33,12 +31,17 @@ const options = yargs(hideBin(process.argv))
                   default: "default"})
     .argv;
 
+if (!options._[0]) {
+    console.log("ERROR: Input ROOT file not provided!")
+    process.exit(1);
+}
+
 
 console.log("INFO: Reading file:");
-console.log("      " + `${options.inputFile}`);
+console.log("      " + `${options._[0]}`);
 
 
-const inFile = await openFile(`${options.inputFile}`);
+const inFile = await openFile(`${options._[0]}`);
 
 let obj;
 try {
