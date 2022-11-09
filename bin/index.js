@@ -13,8 +13,9 @@ import {Blob} from 'node:buffer';
 import * as THREE from 'three';
 import { GLTFExporter } from './GLTFExporter.js';
 
-// FS
+// Node
 import * as fs from "fs";
+import * as path from "path";
 
 
 const options = yargs(hideBin(process.argv))
@@ -22,9 +23,8 @@ const options = yargs(hideBin(process.argv))
     .positional("input-file", {describe: "Input ROOT file",
                                type: "string"})
     .option("o", {alias: "output-file",
-                  describe: "Output ROOT file",
-                  type: "string",
-                  default: "detector.gltf"})
+                  describe: "Name of output glTF file",
+                  type: "string"})
     .option("n", {alias: "name",
                   describe: "Object name",
                   type: "string",
@@ -37,11 +37,16 @@ if (!options._[0]) {
 }
 
 
+const inFilePath = `${options._[0]}`;
 console.log("INFO: Reading file:");
-console.log("      " + `${options._[0]}`);
+console.log("      " + inFilePath);
 
+let outFileName = path.parse(inFilePath).name + '.gltf';
+if (options.outputFile) {
+  outFileName = options.outputFile;
+}
 
-const inFile = await openFile(`${options._[0]}`);
+const inFile = await openFile(inFilePath);
 
 let obj;
 try {
@@ -70,6 +75,6 @@ exporter.parse(obj3d, function(gltf) {
             process.exit(1);
         }
 
-        console.log("INFO: Result saved to: '" + `${options.outputFile}`);
+        console.log("INFO: Result saved to: '" + outFileName);
     })
 });
