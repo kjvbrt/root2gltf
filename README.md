@@ -3,6 +3,8 @@
 This app converts detector objects from ROOT format in GLtf.
 Depends on JSROOT and Three.js.
 
+Uses also patched version of the `GLTFExporter.js` from Three.js.
+
 ## Installation
 
 After git clone run:
@@ -14,5 +16,5 @@ npm ci
 
 To run the app do in the main directory:
 ```
-node . -i detector.root
+node . detector.root
 ```
