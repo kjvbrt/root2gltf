@@ -1,0 +1,16 @@
+{
+  "childrenToHide": [
+    "passive_",
+    "active_",
+    "PCB_"
+  ],
+  "subParts": {
+    "Cryo > Front": [["ECAL_Cryo_front_0"], 0.8],
+    "Cryo > Back": [["ECAL_Cryo_back_1"], 0.8],
+    "Cryo > Sides": [["ECAL_Cryo_side_2"], 0.8],
+    "Services > _Front": [["services_front_3"], 0.6],
+    "Services > _Back": [["services_back_4"], 0.6],
+    "Bath": [["LAr_bath_5"], true]
+  },
+  "maxLevel": 4
+}

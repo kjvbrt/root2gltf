@@ -1,3 +1,7 @@
 *root
 *gltf
 node_modules
+*json
+!config_example.json
+!package.json
+!package-lock.json

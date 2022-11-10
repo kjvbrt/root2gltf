@@ -4,13 +4,9 @@
 import yargs from "yargs";
 import {hideBin} from "yargs/helpers";
 
-// JSROOT
-// import {openFile} from "jsroot";
-// import {geoCfg, build} from "jsroot/geom";
-
 // Three
-import {Blob} from 'node:buffer';
-import * as THREE from 'three';
+// import {Blob} from 'node:buffer';
+// import * as THREE from 'three';
 // import { GLTFExporter } from './GLTFExporter.js';
 
 // GLTF exporter
@@ -22,7 +18,7 @@ import * as path from "path";
 
 
 const options = yargs(hideBin(process.argv))
-    .usage("Usage: [-h] [-n <object-name>] [-o <output-file>] <input-file>")
+    .usage("Usage: [-h] [-n <object-name>] [-o <output-file>] [-c <config-file>] <input-file>")
     .positional("input-file", {describe: "Input ROOT file",
                                type: "string"})
     .option("o", {alias: "output-file",
@@ -32,6 +28,10 @@ const options = yargs(hideBin(process.argv))
                   describe: "Object name",
                   type: "string",
                   default: "default"})
+    .option("c", {alias: "config",
+                  describe: "Configuration file for the detector",
+                  type: "string",
+                  default: "config.json"})
     .argv;
 
 if (!options._[0]) {
@@ -39,6 +39,13 @@ if (!options._[0]) {
     process.exit(1);
 }
 
+let configFilePath = "config.json";
+if (options.config) {
+  configFilePath = options.config;
+}
+console.log("INFO: Using this configuration file:");
+console.log("      " + configFilePath);
+const config = JSON.parse(fs.readFileSync(configFilePath));
 
 const inFilePath = `${options._[0]}`;
 console.log("INFO: Reading file:");
@@ -49,61 +56,9 @@ if (options.outputFile) {
   outFileName = options.outputFile;
 }
 
-/*
-const inFile = await openFile(inFilePath);
-
-let obj;
-try {
-    obj = await inFile.readObject(`${options.name}`);
-} catch (err) {
-    if (err.message.includes("Key not found")) {
-        console.log("ERROR: Provided object name '" +
-                    `${options.name}` + "' not found!")
-        process.exit(1);
-    } else {
-        throw err;
-    }
-}
-
-let objOpt = {numfaces:100000};
-const obj3d = build(obj, objOpt);
-
-const exporter = new GLTFExporter();
-
-exporter.parse(obj3d, function(gltf) {
-  // console.log(JSON.stringify(gltf));
-    fs.writeFile(`${options.outputFile}`, JSON.stringify(gltf), 'utf8', function (err) {
-        if (err) {
-            console.log("ERROR: File can't be saved!");
-            return console.log(err);
-            process.exit(1);
-        }
-
-        console.log("INFO: Result saved to: '" + outFileName);
-    })
-});
-*/
-
-let hide_children = [
-
-      "passive_",
-      "active_",
-      "PCB_"
-
-];
-
-let subparts = {
-        "Cryo > Front" : [["ECAL_Cryo_front_0"], .8],
-        "Cryo > Back" : [["ECAL_Cryo_back_1"], .8],
-        "Cryo > Sides" : [["ECAL_Cryo_side_2"], .8],
-        "Services > _Front" : [["services_front_3"], .6],
-        "Services > _Back" : [["services_back_4"], .6],
-        "Bath": [["LAr_bath_5"], true]
-}
-
 convertGeometry(inFilePath,
                 outFileName,
-                4,
-                subparts,
-                hide_children,
+                config.maxLevel,
+                config.subParts,
+                config.childrenToHide,
                 options.objectName);
