@@ -5,13 +5,16 @@ import yargs from "yargs";
 import {hideBin} from "yargs/helpers";
 
 // JSROOT
-import {openFile} from "jsroot";
-import {build} from "jsroot/geom";
+// import {openFile} from "jsroot";
+// import {geoCfg, build} from "jsroot/geom";
 
 // Three
 import {Blob} from 'node:buffer';
 import * as THREE from 'three';
-import { GLTFExporter } from './GLTFExporter.js';
+// import { GLTFExporter } from './GLTFExporter.js';
+
+// GLTF exporter
+import { convertGeometry } from './phoenixExport.js';
 
 // Node
 import * as fs from "fs";
@@ -25,7 +28,7 @@ const options = yargs(hideBin(process.argv))
     .option("o", {alias: "output-file",
                   describe: "Name of output glTF file",
                   type: "string"})
-    .option("n", {alias: "name",
+    .option("n", {alias: "object-name",
                   describe: "Object name",
                   type: "string",
                   default: "default"})
@@ -46,6 +49,7 @@ if (options.outputFile) {
   outFileName = options.outputFile;
 }
 
+/*
 const inFile = await openFile(inFilePath);
 
 let obj;
@@ -78,3 +82,28 @@ exporter.parse(obj3d, function(gltf) {
         console.log("INFO: Result saved to: '" + outFileName);
     })
 });
+*/
+
+let hide_children = [
+
+      "passive_",
+      "active_",
+      "PCB_"
+
+];
+
+let subparts = {
+        "Cryo > Front" : [["ECAL_Cryo_front_0"], .8],
+        "Cryo > Back" : [["ECAL_Cryo_back_1"], .8],
+        "Cryo > Sides" : [["ECAL_Cryo_side_2"], .8],
+        "Services > _Front" : [["services_front_3"], .6],
+        "Services > _Back" : [["services_back_4"], .6],
+        "Bath": [["LAr_bath_5"], true]
+}
+
+convertGeometry(inFilePath,
+                outFileName,
+                4,
+                subparts,
+                hide_children,
+                options.objectName);
