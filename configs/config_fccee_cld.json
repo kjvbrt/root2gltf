@@ -14,16 +14,16 @@
     "LumiCal" : [["LumiCal_envelope_8",
                   "LumiCalInstrumentation_envelope_9",
                   "LumiCalCooling_envelope_10",
-                  "LumiCalBackShield_envelope_11"], .8],
-    "Vertex" : [["Vertex_12"], .8],
-    "Inner Trackers" : [["InnerTrackers_13"], .6],
-    "Outer Trackers" : [["OuterTrackers_14"], .6],
+                  "LumiCalBackShield_envelope_11"], 0.8],
+    "Vertex" : [["Vertex_12"], 0.8],
+    "Inner Trackers" : [["InnerTrackers_13"], 0.6],
+    "Outer Trackers" : [["OuterTrackers_14"], 0.6],
     "ECal" : [["ECalBarrel_envelope_15",
-               "ECalEndcap_envelope_16"], .6],
+               "ECalEndcap_envelope_16"], 0.6],
     "HCal" : [["HCalBarrel_envelope_17",
-               "HCalEndcaps_18"], .6],
-    "Solenoid" : [["Solenoid_19"], .6],
-    "Yoke" : [["YokeBarrel_envelope_20", "YokeEndcap_envelope_21"], .5]
+               "HCalEndcaps_18"], 0.6],
+    "Solenoid" : [["Solenoid_19"], 0.6],
+    "Yoke" : [["YokeBarrel_envelope_20", "YokeEndcap_envelope_21"], 0.5]
   },
   "maxLevel": 3
 }
