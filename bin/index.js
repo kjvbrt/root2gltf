@@ -32,6 +32,7 @@ const options = yargs(hideBin(process.argv))
                   describe: "Configuration file for the detector",
                   type: "string",
                   default: "config.json"})
+    .help("h")
     .argv;
 
 if (!options._[0]) {
