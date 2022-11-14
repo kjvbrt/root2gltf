@@ -1,0 +1,29 @@
+{
+  "childrenToHide": [
+    "component"
+  ],
+  "subParts": {
+    "Beam Pipe" : [["BeBeampipe_assembly_0",
+                    "BeamPipe_assembly_1",
+                    "BeamPipeShield_assembly_2",
+                    "BeamPipeShield_noRot_assembly_3"], 0.8],
+    "HOM Absorber" : [["HOMAbsorber_envelope_4",
+                       "HOMAbsorber_PunchThrough_assembly_5"], 0.8],
+    "Screen Solenoid" : [["CompSol_assembly_6",
+                          "ScreenSol_assembly_7"], 0.8],
+    "LumiCal" : [["LumiCal_envelope_8",
+                  "LumiCalInstrumentation_envelope_9",
+                  "LumiCalCooling_envelope_10",
+                  "LumiCalBackShield_envelope_11"], .8],
+    "Vertex" : [["Vertex_12"], .8],
+    "Inner Trackers" : [["InnerTrackers_13"], .6],
+    "Outer Trackers" : [["OuterTrackers_14"], .6],
+    "ECal" : [["ECalBarrel_envelope_15",
+               "ECalEndcap_envelope_16"], .6],
+    "HCal" : [["HCalBarrel_envelope_17",
+               "HCalEndcaps_18"], .6],
+    "Solenoid" : [["Solenoid_19"], .6],
+    "Yoke" : [["YokeBarrel_envelope_20", "YokeEndcap_envelope_21"], .5]
+  },
+  "maxLevel": 3
+}

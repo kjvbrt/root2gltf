@@ -1,0 +1,34 @@
+{
+  "childrenToHide": [
+    "component",
+    "CDCHlayer",
+    "passive_",
+    "active_",
+    "PCB_",
+    "HCalTileSequenceVol_"
+  ],
+  "subParts": {
+    "Beam Pipe" : [["BeBeampipe_assembly_0",
+                    "BeamPipe_assembly_1",
+                    "BeamPipeShield_assembly_2",
+                    "BeamPipeShield_noRot_assembly_3"], .6],
+    "Screen Solenoid" : [["CompSol_assembly_4",
+                          "ScreenSol_assembly_5"], .6],
+    "LumiCal" : [["LumiCal_envelope_6",
+                  "LumiCalInstrumentation_envelope_7",
+                  "LumiCalCooling_envelope_8",
+                  "LumiCalBackShield_envelope_9"], .6],
+    "HOM Absorber" : [["HOMAbsorber_envelope_10",
+                       "HOMAbsorber_PunchThrough_assembly_11"], .6],
+    "Vertex" : [["Vertex_12"], .6],
+    "CDCH" : [["CDCH_13"], .6],
+    "LAr Calo > Cryo Front" : [["ECAL_Cryo_front_0"], .6],
+    "LAr Calo > Cryo Back" : [["ECAL_Cryo_back_1"], .6],
+    "LAr Calo > Cryo Sides" : [["ECAL_Cryo_side_2"], .6],
+    "LAr Calo > Services Front" : [["services_front_3"], .6],
+    "LAr Calo > Services Back" : [["services_back_4"], .6],
+    "LAr Calo > Bath": [["LAr_bath_5"], .6],
+    "HCal" : [["HCalEnvelopeVolume_15"], .6]
+  },
+  "maxLevel": 3
+}

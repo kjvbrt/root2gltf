@@ -1,0 +1,26 @@
+{
+  "childrenToHide": [
+    "component",
+    "CDCHlayer"
+  ],
+  "subParts": {
+    "Beam Pipe" : [["BeBeampipe_assembly_0",
+                    "BeamPipe_assembly_1",
+                    "BeamPipeShield_assembly_2",
+                    "BeamPipeShield_noRot_assembly_3"], 0.8],
+    "Screen Solenoid" : [["CompSol_assembly_4",
+                          "ScreenSol_assembly_5"], 0.8],
+    "LumiCal" : [["LumiCal_envelope_6",
+                  "LumiCalInstrumentation_envelope_7",
+                  "LumiCalCooling_envelope_8",
+                  "LumiCalBackShield_envelope_9"], .8],
+    "HOM Absorber" : [["HOMAbsorber_envelope_10",
+                       "HOMAbsorber_PunchThrough_assembly_11"], 0.7],
+    "Vertex" : [["Vertex_12"], .7],
+    "CDCH" : [["CDCH_13"], 0.7],
+    "Calorimeter" : [["CaloBarrel_14",
+                      "CaloEndCap_15",
+                      "CaloEndCap2_16"], 0.7]
+  },
+  "maxLevel": 3
+}
