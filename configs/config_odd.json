@@ -1,0 +1,14 @@
+{
+  "childrenToHide": [
+  ],
+  "subParts": {
+    "Beam Pipe" : [["BeamPipe_0"], 0.6],
+    "Pixels" : [["Pixels_1"], 0.6],
+    "PST" : [["PST_2"], 0.6],
+    "Short Strips": [["ShortStrips_3"], 0.6],
+    "Long Strips": [["LongStrips_4"], 0.6],
+    "Solenoid": [["Solenoid_5"], 0.6],
+    "ECal": [["ECal_6"], 0.6]
+  },
+  "maxLevel": 4
+}
