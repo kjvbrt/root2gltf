@@ -20,7 +20,7 @@
     "SET": [["SET_LadderLogical\\w+"], 0.8],
     "TPC": [["TPC\\w+"], 0.8],
     "Tube": [["tube_\\w+"], 0.8],
-    "VXD": [["ElectronicsEnd_\\w+", "SiActiveLayer\\w+", "ElectronicsBand_\\w+", "FlexCable\\w+|FoamSpacer\\w+|MetalTraces\\w+|Kapton\\w+|MetalLines\\w+|BerylliumAnnulus\\w+|CoolPipe\\w+|ExternalKapton\\w+|ExternalMetalCable\\w+|Support+(Shell|Cone|For)\\w+|EndPlateShell\\w+|Cryostat+(Alu|Foam)\\w+"], 0.8],
+    "VXD": [["ElectronicsEnd_\\w+", "SiActiveLayer\\w+", "ElectronicsBand_\\w+", "FlexCable\\w+|FoamSpacer\\w+|MetalTraces\\w+|Kapton\\w+|MetalLines\\w+|BerylliumAnnulus\\w+|CoolPipe\\w+|ExternalKapton\\w+|ExternalMetalCable\\w+|Support+(Shell|Cone|For)\\w+|Cryostat+(Alu|Foam)\\w+"], 0.8],
     "YokeBarrel": [["YokeBarrel\\w+"], 0.8],
     "YokeEndcap": [["YokeEndcap\\w+"], 0.8]
   },
