@@ -20,7 +20,10 @@
     "SET": [["SET_LadderLogical\\w+"], 0.8],
     "TPC": [["TPC\\w+"], 0.8],
     "Tube": [["tube_\\w+"], 0.8],
-    "VXD": [["SiActiveLayer\\w+"], 0.8],
+<<<<<<< HEAD:configs/config_ild_trial.json
+=======
+    "VXD": [["ElectronicsEnd_\\w+", "SiActiveLayer\\w+", "ElectronicsBand_\\w+"], 0.8],
+>>>>>>> 1963a27f184f7a49bfac9c04c4bbf83d7bebc5fd:configs/config_ild_trial2.json
     "YokeBarrel": [["YokeBarrel\\w+"], 0.8],
     "YokeEndcap": [["YokeEndcap\\w+"], 0.8]
   },
