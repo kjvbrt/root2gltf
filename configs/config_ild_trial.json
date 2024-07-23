@@ -17,7 +17,7 @@
     "QDX_cryo": [["section_qd0_cryostat_+((..._.)|(wall_.....)|(frontface_.....)|(interiorMaterialPlaceholder_.....))"], 0.8],
     "QDX_support": [["section_+((qd0_support_..._.)|(forward_support_tube_.....))"], 0.8],
     "SIT": [["SIT_LadderLogical\\w+"], 0.8],
-    "SET": [["layer_0_0", "layer_1_1"], 0.8],
+    "SET": [["SET_LadderLogical\\w+"], 0.8],
     "TPC": [["TPC\\w+"], 0.8],
     "Tube": [["tube_\\w+"], 0.8],
     "VXD": [["ElectronicsEnd_\\w+", "SiActiveLayer\\w+", "ElectronicsBand_\\w+", "FlexCable\\w+|FoamSpacer\\w+|MetalTraces\\w+|Kapton\\w+|MetalLines\\w+|BerylliumAnnulus\\w+|CoolPipe\\w+|ExternalKapton\\w+|ExternalMetalCable\\w+|Support+(Shell|Cone|For)\\w+|EndPlateShell\\w+|Cryostat+(Alu|Foam)\\w+"], 0.8],
