@@ -20,7 +20,7 @@
     "VXD": [["SiActiveLayer\\w+"], 0.8],
     "SET": [["SET_LadderLogical\\w+"], 0.8],
     "TPC": [["TPC\\w+"], 0.8],
-    "Tube": [["tube_\\w+"], 0.8],
+    "Tube": [["tube\\w+"], 0.8],
     "YokeBarrel": [["YokeBarrel\\w+"], 0.8],
     "YokeEndcap": [["YokeEndcap\\w+"], 0.8]
   },
