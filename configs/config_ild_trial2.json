@@ -1,6 +1,8 @@
 {
   "childrenToHide": [
-    "SServices"
+    "SServices",
+    "QDX_cryo",
+    "QDX_support"
   ],
   "subParts": {
     "EcalBarrel" : [["EcalBarrel_module\\w+"], 0.8],
@@ -14,8 +16,6 @@
     "HcalRing" : [["HcalEndCapRingLogical_0", "HcalEndCapRingLogical_1"], 0.8],
     "LHCal" : [["LHCal_module_0", "LHCal_module_1"], 0.8],
     "HcalBarrel": [["HcalBarrel_module_.", "HcalBarrel_Module_lateral_plate_."], 0.8],
-    "QDX_cryo": [["section_qd0_cryostat_+((..._.)|(wall_.....)|(frontface_.....)|(interiorMaterialPlaceholder_.....))"], 0.8],
-    "QDX_support": [["section_+((qd0_support_..._.)|(forward_support_tube_.....))"], 0.8],
     "SIT": [["SIT_LadderLogical\\w+"], 0.8],
     "VXD": [["SiActiveLayer\\w+"], 0.8],
     "SET": [["SET_LadderLogical\\w+"], 0.8],
