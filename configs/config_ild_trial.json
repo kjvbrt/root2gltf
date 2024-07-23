@@ -1,0 +1,28 @@
+{
+  "childrenToHide": [
+    "SServices"
+  ],
+  "subParts": {
+    "EcalBarrel" : [["EcalBarrel_module\\w+"], 0.8],
+    "Coil" : [["coil_vol_0"], 0.8],
+    "Lcal" : [["Lcal_module_0", "Lcal_module_1"], 0.8],
+    "EcalEndcap" : [["EcalEndcapQuadrant_."], 0.8],
+    "EcalPlug" : [["ECRing_0", "ECRing_1"], 0.8],
+    "BeamCal" : [["Beam_Cal_module_0", "Beam_Cal_module_1"], 0.8],
+    "FTD" : [["FTDAirDiskLogicalPZ_._.", "FTDAirDiskLogicalNZ_._."], 0.8],
+    "HcalEndcap" : [["HcalEndcap_EndcapModule._.", "Hcal_endcap_FEE_."], 0.8],
+    "HcalRing" : [["HcalEndCapRingLogical_0", "HcalEndCapRingLogical_1"], 0.8],
+    "LHCal" : [["LHCal_module_0", "LHCal_module_1"], 0.8],
+    "HcalBarrel": [["HcalBarrel_module_.", "HcalBarrel_Module_lateral_plate_."], 0.8],
+    "QDX_cryo": [["section_qd0_cryostat_+((..._.)|(wall_.....)|(frontface_.....)|(interiorMaterialPlaceholder_.....))"], 0.8],
+    "QDX_support": [["section_+((qd0_support_..._.)|(forward_support_tube_.....))"], 0.8],
+    "SIT": [["(SIT_LadderLogical_.._)+(.)", "(SIT_LadderLogical_.._)+(..)"], 0.8],
+    "SET": [["layer_0_0", "layer_1_1"], 0.8],
+    "TPC": [["TPC\\w+"], 0.8],
+    "Tube": [["tube_\\w+"], 0.8],
+    "VXD": [["ElectronicsEnd_\\w+", "SiActiveLayer\\w+", "ElectronicsBand_\\w+", "FlexCable\\w+|FoamSpacer\\w+|MetalTraces\\w+|Kapton\\w+|MetalLines\\w+|BerylliumAnnulus\\w+|CoolPipe\\w+|ExternalKapton\\w+|ExternalMetalCable\\w+|Support+(Shell|Cone|For)\\w+|EndPlateShell\\w+|Cryostat+(Alu|Foam)\\w+"], 0.8],
+    "YokeBarrel": [["YokeBarrel\\w+"], 0.8],
+    "YokeEndcap": [["YokeEndcap\\w+"], 0.8]
+  },
+  "maxLevel": 3
+}
