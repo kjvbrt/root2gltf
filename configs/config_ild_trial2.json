@@ -1,0 +1,28 @@
+{
+  "childrenToHide": [
+    "SServices",
+    "QDX_cryo",
+    "QDX_support"
+  ],
+  "subParts": {
+    "EcalBarrel" : [["EcalBarrel_module\\w+"], 0.8],
+    "Coil" : [["coil_vol_0"], 0.8],
+    "Lcal" : [["Lcal_module_0", "Lcal_module_1"], 0.8],
+    "EcalEndcap" : [["EcalEndcapQuadrant_."], 0.8],
+    "EcalPlug" : [["ECRing_0", "ECRing_1"], 0.8],
+    "BeamCal" : [["Beam_Cal_module_0", "Beam_Cal_module_1"], 0.8],
+    "FTD" : [["FTDAirDiskLogicalPZ_._.", "FTDAirDiskLogicalNZ_._."], 0.8],
+    "HcalEndcap" : [["HcalEndcap_EndcapModule._.", "Hcal_endcap_FEE_."], 0.8],
+    "HcalRing" : [["HcalEndCapRingLogical_0", "HcalEndCapRingLogical_1"], 0.8],
+    "LHCal" : [["LHCal_module_0", "LHCal_module_1"], 0.8],
+    "HcalBarrel": [["HcalBarrel_module_.", "HcalBarrel_Module_lateral_plate_."], 0.8],
+    "SIT": [["SIT_LadderLogical\\w+"], 0.8],
+    "VXD": [["SiActiveLayer\\w+"], 0.8],
+    "SET": [["SET_LadderLogical\\w+"], 0.8],
+    "TPC": [["TPC\\w+"], 0.8],
+    "Tube": [["tube\\w+"], 0.8],
+    "YokeBarrel": [["YokeBarrel\\w+"], 0.8],
+    "YokeEndcap": [["YokeEndcap\\w+"], 0.8]
+  },
+  "maxLevel": 3
+}

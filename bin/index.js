@@ -57,6 +57,14 @@ if (options.outputFile) {
   outFileName = options.outputFile;
 }
 
+for (var [name, entry] of Object.entries(config.subParts)) {
+  let temp = [];
+  for (let path of entry[0]) {
+    temp.push(new RegExp(path));
+  }
+  entry[0] = temp;
+}
+
 convertGeometry(inFilePath,
                 outFileName,
                 config.maxLevel,
