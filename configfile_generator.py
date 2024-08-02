@@ -34,13 +34,26 @@ detector_name = args.compactFile.split("/")[-1].split(".")[0]
 # start = theDetector.detector("OpenDataTracker")
 start = theDetector.world()
 
-def tree(detElement):
+def tree(detElement, depth):
     nd = {}
+    depth += 1
     children = detElement.children()
     for raw_name, child in children:
-        dictionary = tree(child)
-        nd.update({raw_name: dictionary})
+        if depth > args.maxDepth:
+            tree(child, depth)
+        else:
+            dictionary = tree(child, depth)
+            nd.update({raw_name: dictionary})
     return nd
 
-total_dict = tree(start)
-pprint.pprint(total_dict)
+def post_processing(detector_dict):
+    main_parts = list(detector_dict.keys())
+    for main in main_parts:
+        print('yay')
+
+
+detector_dict = tree(start, 0)
+vals = list(detector_dict['VXD_support'].values())
+print(vals)
+#pprint.pprint(detector_dict)
+#final_dict = post_processing(detector_dict)
