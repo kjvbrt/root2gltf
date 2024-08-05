@@ -3,9 +3,7 @@
 
 from dd4hep import Detector
 import re
-from collections import Counter
 from argparse import ArgumentParser
-from collections import defaultdict
 import pprint
 import json
 
@@ -20,27 +18,23 @@ parser.add_argument(
     default=10,
     type=int,
 )
-parser.add_argument(
-    "--maxEdges", help="Maximum number of edges per connection", default=5, type=int
-)
 
 args = parser.parse_args()
 
 theDetector = Detector.getInstance()
 theDetector.fromXML(args.compactFile)
-
-# take part between last / and before the .xml
-detector_name = args.compactFile.split("/")[-1].split(".")[0]
-
-# start = theDetector.detector("OpenDataTracker")
 start = theDetector.world()
+
+def process_name(raw_name):
+    name = re.sub(r"\d+", ".*", raw_name)
+    return name
 
 def tree(detElement, depth, maxDepth):
     nd = {}
     depth += 1
     children = detElement.children()
     for raw_name, child in children:
-        if depth > args.maxDepth:
+        if depth > maxDepth:
             tree(child, depth, maxDepth)
         else:
             dictionary = tree(child, depth, maxDepth)
@@ -50,25 +44,25 @@ def tree(detElement, depth, maxDepth):
 detector_dict = tree(start, 0, args.maxDepth)
 #pprint.pprint(detector_dict)
 
-def post_processing(obj, subParts={}, sublist= []):
+def post_processing(obj, main_parts, subParts={}, sublist= []):
     for k, v in obj.items():
-        main_parts = list(detector_dict.keys())
         if k in main_parts:
-            k = f'{k}\\w+'
-            sublist = [k]
+            sublist = [f'{k}_(?!envelope)\\w+']
             outer_list = []
             outer_list.append(sublist)
             outer_list.append(0.8)
             subParts.update({k: outer_list})
-            post_processing(v, subParts, sublist)
+            post_processing(v, main_parts, subParts, sublist)
                 
         else:
-            sublist.append(k)
-            post_processing(v, subParts, sublist)
+            k_new = process_name(k)
+            x = re.search("module|stave|layer|Calorimeter", k_new)
+            if k_new not in sublist and x == None:
+                sublist.append(k_new)
+            post_processing(v, main_parts, subParts, sublist)
     return subParts
             
-subPart_processed = post_processing(detector_dict)
-#pprint.pprint(subPart_processed)
+subPart_processed = post_processing(detector_dict, list(detector_dict.keys()))
 
 final_dict = {"childrenToHide": [],
               "subParts": subPart_processed,
