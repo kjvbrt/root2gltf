@@ -18,6 +18,12 @@ parser.add_argument(
     default=10,
     type=int,
 )
+parser.add_argument(
+    "--config_path",
+    help="Location of produced config file",
+    default='nothing',
+    type=str,
+)
 
 args = parser.parse_args()
 
@@ -42,7 +48,6 @@ def tree(detElement, depth, maxDepth):
     return nd
 
 detector_dict = tree(start, 0, args.maxDepth)
-#pprint.pprint(detector_dict)
 
 def post_processing(obj, main_parts, subParts={}, sublist= []):
     for k, v in obj.items():
@@ -51,11 +56,11 @@ def post_processing(obj, main_parts, subParts={}, sublist= []):
             outer_list = []
             outer_list.append(sublist)
             outer_list.append(0.8)
-            subParts.update({k: outer_list})
+            subParts.update({str(k): outer_list})
             post_processing(v, main_parts, subParts, sublist)
                 
         else:
-            k_new = process_name(k)
+            k_new = process_name(f"{k}")
             x = re.search("module|stave|layer|Calorimeter", k_new)
             if k_new not in sublist and x == None:
                 sublist.append(k_new)
@@ -69,5 +74,5 @@ final_dict = {"childrenToHide": [],
               "maxLevel": 3}
 
 pprint.pprint(final_dict)
-with open("config_automatic.json", "w") as outfile: 
+with open(args.config_path, "w") as outfile: 
     json.dump(final_dict, outfile)
