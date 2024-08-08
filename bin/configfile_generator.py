@@ -10,10 +10,10 @@ import json
 parser = ArgumentParser()
 
 parser.add_argument(
-    "--compactFile", help="DD4hep compact description xml", required=True
+    "--compact", help="DD4hep compact description xml", required=True
 )
 parser.add_argument(
-    "--maxDepth",
+    "--max_depth",
     help="Maximum traversal depth of the detector tree",
     default=10,
     type=int,
@@ -26,9 +26,8 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-
 theDetector = Detector.getInstance()
-theDetector.fromXML(args.compactFile)
+theDetector.fromXML(args.compact)
 start = theDetector.world()
 
 def process_name(raw_name):
@@ -47,12 +46,12 @@ def tree(detElement, depth, maxDepth):
             nd.update({raw_name: dictionary})
     return nd
 
-detector_dict = tree(start, 0, args.maxDepth)
 
 def post_processing(obj, main_parts, subParts={}, sublist= []):
     for k, v in obj.items():
         if k in main_parts:
-            sublist = [f'{k}_(?!envelope)\\w+']
+            #remove envelopes from being featured in the final geometry
+            sublist = [f'{k}_(?!envelope)\\w+']  
             outer_list = []
             outer_list.append(sublist)
             outer_list.append(0.8)
@@ -67,6 +66,7 @@ def post_processing(obj, main_parts, subParts={}, sublist= []):
             post_processing(v, main_parts, subParts, sublist)
     return subParts
             
+detector_dict = tree(start, 0, args.max_depth)
 subPart_processed = post_processing(detector_dict, list(detector_dict.keys()))
 
 final_dict = {"childrenToHide": [],
@@ -75,4 +75,4 @@ final_dict = {"childrenToHide": [],
 
 pprint.pprint(final_dict)
 with open(args.config_path, "w") as outfile: 
-    json.dump(final_dict, outfile)
+    json.dump(final_dict, outfile, indent=4)
