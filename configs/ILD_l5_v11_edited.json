@@ -1,0 +1,154 @@
+{
+    "childrenToHide": ["SServices00"],
+    "subParts": {
+        "BeBeampipe": [
+            [
+                "BeBeampipe_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "BeamPipe": [
+            [
+                "BeamPipe_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "BeamPipeShield": [
+            [
+                "BeamPipeShield_assembly_3"
+            ],
+            0.6
+        ],
+        "BeamPipeShield_noRot": [
+            [
+                "BeamPipeShield_noRot_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "Coil": [
+            [
+                "coil_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "CompSol": [
+            [
+                "CompSol_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "EcalBarrel": [
+            [
+                "EcalBarrel_module\\w+"
+            ],
+            0.6
+        ],
+        "EcalEndcap": [
+            [
+                "EcalEndcapQuadrant\\w+"
+            ],
+            0.6
+        ],
+        "HcalBarrel": [
+            [
+                "HcalBarrel_module\\w+",
+                "HcalBarrel_Module"
+            ],
+            0.6
+        ],
+        "HcalEndcap": [
+            [
+                "HcalEndcap_EndcapModule\\w+",
+                "Hcal_endcap\\w+"
+            ],
+            0.6
+        ],
+        "HcalRing": [
+            [
+                "HcalEndCapRingLogical\\w+"
+            ],
+            0.6
+        ],
+        "InnerTrackers": [
+            [
+                "InnerTrackerBarrel_assembly_0",
+                "InnerTrackerEndcapModule\\w+",
+                "InnerTrackerEndcapSupport_assembly_3",
+                "InnerTrackerInterlink_assembly_4",
+                "InnerTrackerVertexCable_assembly_5",
+                "BeampipeShell\\w+"
+            ],
+            0.8
+        ],
+        "LumiCal": [
+            [
+                "LumiCal_layer\\w+"
+            ],
+            0.6
+        ],
+        "LumiCalBackShield": [
+            [
+                "LumiCalBackShield_module\\w+"
+            ],
+            0.6
+        ],
+        "LumiCalCooling": [
+            [
+                "LumiCalCooling_module\\w+"
+            ],
+            0.6
+        ],
+        "LumiCalInstrumentation": [
+            [
+                "LumiCalInstrumentation_module\\w+"
+            ],
+            0.6
+        ],
+        "SET": [
+            [
+                "SET_LadderLogical\\w+"
+            ],
+            0.6
+        ],
+        "ScreenSol": [
+            [
+                "ScreenSol_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "SynchRadMask": [
+            [
+                "SynchRadMask_(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "TPC": [
+            [
+                "TPC(?!envelope)\\w+"
+            ],
+            0.6
+        ],
+        "Vertex": [
+            [
+                "VertexBarrel_layer\\w+",
+                "SiVertexEndcapModule\\w+",
+                "VertexVerticalCable_layer\\w+"
+            ],
+            0.8
+        ],
+        "YokeBarrel": [
+            [
+                "YokeBarrel_module\\w+"
+            ],
+            0.5
+        ],
+        "YokeEndcap": [
+            [
+                "YokeEndcap_module\\w+",
+                "YokeEndcap_plug\\w+"
+            ],
+            0.5
+        ]
+    },
+    "maxLevel": 3
+}

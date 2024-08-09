@@ -20,10 +20,8 @@ def main():
                         default='', type=str)
     parser.add_argument('-d', '--depth', help='Level of layers in detector to consider in the conversion',
                         default=10, type=int)
-
-
-
     args = parser.parse_args()
+    print(args.compact_files)
 
     for cfile in args.compact_files:
         if args.in_root and args.config_file_in:

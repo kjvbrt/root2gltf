@@ -13,16 +13,13 @@ parser.add_argument(
     "--compact", help="DD4hep compact description xml", required=True
 )
 parser.add_argument(
-    "--max_depth",
-    help="Maximum traversal depth of the detector tree",
-    default=10,
-    type=int,
+    "--max_depth", help="Maximum traversal depth of the detector tree", default=10, type=int,
 )
 parser.add_argument(
-    "--config_path",
-    help="Location of produced config file",
-    default='nothing',
-    type=str,
+    "--config_path", help="Location of produced config file", default='nothing', type=str,
+)
+parser.add_argument(
+    "--hide_list", help="List of detector geometries that aren't shown", default=[], type=list,
 )
 
 args = parser.parse_args()
@@ -47,29 +44,35 @@ def tree(detElement, depth, maxDepth):
     return nd
 
 
-def post_processing(obj, main_parts, subParts={}, sublist= []):
+def post_processing(obj, main_parts, hide_list, subParts={}, sublist= [], hide_children= []):
     for k, v in obj.items():
         if k in main_parts:
-            #remove envelopes from being featured in the final geometry
-            sublist = [f'{k}_(?!envelope)\\w+']  
-            outer_list = []
-            outer_list.append(sublist)
-            outer_list.append(0.8)
-            subParts.update({str(k): outer_list})
-            post_processing(v, main_parts, subParts, sublist)
+            y = re.search('|'.join(hide_list), k) ####where the error is currently doesn't like the join function
+            if y not in hide_list:
+                #removes envelopes from being featured in the final geometry
+                sublist = [f'({k}_(?!envelope))\\w+|({k}(?!_))\w+']  
+                outer_list = []
+                outer_list.append(sublist)
+                outer_list.append(0.8)
+                subParts.update({str(k): outer_list})
+                post_processing(v, main_parts, hide_list, subParts, sublist)
+
+            else:
+                hide_children.append(k)
+                post_processing(v, main_parts, hide_list, subParts, sublist, hide_children)
                 
         else:
             k_new = process_name(f"{k}")
-            x = re.search("module|stave|layer|Calorimeter", k_new)
+            x = re.search("module|stave|layer|Calorimeter|component", k_new)
             if k_new not in sublist and x == None:
-                sublist.append(k_new)
-            post_processing(v, main_parts, subParts, sublist)
-    return subParts
+                sublist.append(f'{k_new}\\w+')
+            post_processing(v, main_parts, hide_list, subParts, sublist, hide_children)
+    return subParts, hide_children
             
 detector_dict = tree(start, 0, args.max_depth)
-subPart_processed = post_processing(detector_dict, list(detector_dict.keys()))
+subPart_processed, hidden_children = post_processing(detector_dict, list(detector_dict.keys()), args.hide_list)
 
-final_dict = {"childrenToHide": [],
+final_dict = {"childrenToHide": hidden_children,
               "subParts": subPart_processed,
               "maxLevel": 3}
 
