@@ -68,6 +68,19 @@ const mergeBufferViews = (target: any, source: any): any[] => {
 };
 
 const mergeGLTF = (target: any, source: any): void => {
+  for (const field of [
+    "scenes",
+    "nodes",
+    "meshes",
+    "accessors",
+    "bufferViews",
+    "materials",
+    "buffers",
+  ]) {
+    target[field] ??= [];
+    source[field] ??= [];
+  }
+
   // glTF files have the following keys:
 
   // 1. asset: kept from target as-is

@@ -1,15 +1,14 @@
+import { K_VIS_DAUGHTER, K_VIS_ON_SCREEN } from "./lib/constants.js";
+import type { TGeoNodeMatrix, TGeoVolume } from "./lib/types/root.js";
 import {
-  K_VIS_DAUGHTER,
-  K_VIS_THIS,
-  SPHERE_NSEG,
-  SPHERE_NZ,
-  TGEO_COMPOSITE_SHAPE,
-  TGEO_SPHERE,
-} from "./lib/constants.js";
-import type { TGeoNodeMatrix } from "./lib/types/root.js";
+  areDimensionsEqual,
+  arePositionsEqual,
+  reshapeSphere,
+  shrinkShape,
+} from "./lib/utils/optimizeGraphics.js";
 
 // Filter out all volume subparts within the hidden paths and beyond a maximum level
-export const removeTrees = (
+export const pruneTree = (
   node: TGeoNodeMatrix,
   hiddenPaths: Set<string>,
   maxLevel: number,
@@ -41,42 +40,43 @@ export const hideTree = (node: TGeoNodeMatrix): void => {
   while (stack.length) {
     const current = stack.pop()!;
 
-    current.fVolume.fGeoAtt &= ~K_VIS_THIS;
+    current.fVolume.fGeoAtt &= ~K_VIS_ON_SCREEN; // Clears node visibility flag
 
     if (current.fVolume.fNodes) stack.push(...current.fVolume.fNodes.arr);
   }
-};
-
-// Avoid megabytes for near-flat shapes like Rich mirrors
-const reshapeSphere = (shape: any): void => {
-  if (shape._typename === TGEO_SPHERE) {
-    // Reduce the number of faces in a sphere
-    shape.fNseg = SPHERE_NSEG;
-    shape.fNz = SPHERE_NZ;
-  } else if (shape._typename === TGEO_COMPOSITE_SHAPE) {
-    // Recurse shape
-    reshapeSphere(shape.fNode.fLeft);
-    reshapeSphere(shape.fNode.fRight);
-  }
-};
-
-// Makes given node visible
-export const showNode = (node: TGeoNodeMatrix): void => {
-  node.fVolume.fGeoAtt |= K_VIS_THIS;
-
-  reshapeSphere(node.fVolume.fShape);
 };
 
 // Makes given node and all its children visible
 const showTree = (node: TGeoNodeMatrix): void => {
-  const stack: TGeoNodeMatrix[] = [node];
+  const stack: { node: TGeoNodeMatrix; parent: TGeoVolume | null }[] = [
+    { node, parent: null },
+  ];
 
   while (stack.length) {
-    const current = stack.pop()!;
+    const { node: current, parent } = stack.pop()!;
 
-    if (current.fVolume.fFillStyle !== 0) showNode(current);
+    current.fVolume.fGeoAtt |= K_VIS_ON_SCREEN;
 
-    if (current.fVolume.fNodes) stack.push(...current.fVolume.fNodes.arr);
+    // Shrink shape if volume overlaps with the parewnt
+    if (
+      parent !== null &&
+      arePositionsEqual(current.fMatrix) &&
+      areDimensionsEqual(parent.fShape, current.fVolume.fShape) &&
+      current.fVolume.fShape
+    )
+      shrinkShape(current.fVolume.fShape);
+
+    // Reshape sphere if
+    reshapeSphere(current.fVolume.fShape);
+
+    if (current.fVolume.fNodes) {
+      stack.push(
+        ...current.fVolume.fNodes.arr.map((n) => ({
+          node: n,
+          parent: current.fVolume,
+        })),
+      );
+    }
   }
 };
 
@@ -93,11 +93,9 @@ export const findTrees = (
     if (paths.has(n.fName)) {
       // Make given node and all its children visible
       showTree(n);
-      // Mark found
       isFound = true;
     } else if (findTrees(n, paths)) {
-      // If the node name did not match one of the target paths
-      // but one of its children's did, then set visibility flag
+      // Make children visible but not the given node
       n.fVolume.fGeoAtt |= K_VIS_DAUGHTER;
       isFound = true;
     }

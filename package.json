@@ -1,6 +1,6 @@
 {
   "name": "@hep-fcc/root2gltf",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Convert detector geometries from ROOT to the glTF format used by Phoenix",
   "keywords": [
     "ROOT",
